@@ -12,7 +12,7 @@ function App(){
   //login
   const login =async (user,pass)=>{
     try {
-      let attempt = await connector.post('/api/login',{username:user,password:pass})
+      let attempt = await connector.post('/api/login/',{username:user,password:pass})
       console.log('attempt ',attempt)
       let data = await attempt.data
       console.log('data ', data)
@@ -28,12 +28,14 @@ function App(){
 
   const register=async (user,pass,pass2)=>{
     try {
-      let attempt = await connector.post('/api/registration',{username:user,password1:pass,password2:pass2})
+      let attempt = await connector.post('/api/registration/',{username:user,password1:pass,password2:pass2})
       console.log('attempt ',attempt)
       let data = await attempt.data
       console.log('data ', data)
     } catch (error) {
-        console.error(error)
+      console.log('here');
+      console.log(error.request);
+      console.error(error.toJSON())
     }
   }
 
@@ -43,7 +45,7 @@ function App(){
 
   
   if (process.env.NODE_ENV==='development') {
-      connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com/'
+      connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'
   }
   if (window.localStorage.getItem('token')) {
       loginKey(window.localStorage.getItem('token'))

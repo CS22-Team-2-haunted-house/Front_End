@@ -6,10 +6,10 @@ function Login(props) {
             <p>
                 Login Page
             </p>
-            <button onClick={()=>props.connection.login({user:"AshenPheonix",pass:"doubleblind"})}>
+            <button onClick={()=>props.connection.login("AshenPheonix","doubleblind")}>
                 Login
             </button>
-            <button onClick={()=>props.connection.register({user:"AshenPheonix",pass:"doubleblind",pass2:'doubleblind'})}>
+            <button onClick={()=>props.connection.register("AshenPheonix","doubleblind",'doubleblind')}>
                 Register
             </button>
         </div>
