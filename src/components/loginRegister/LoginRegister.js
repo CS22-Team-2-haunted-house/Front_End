@@ -33,10 +33,7 @@ const Login = props => {
             console.log(res);
             console.log(res.data);
             localStorage.setItem('token', res.data.key)
-            // axios.defaults.headers.common[
-            //   "Authorization"
-            // ] = `Token ${res.data.key}`;
-            // props.history.push("/gamemap");
+           
           });
       };
 
@@ -52,10 +49,7 @@ const Login = props => {
             console.log(res);
             console.log(res.data);
             localStorage.setItem('token', res.data.key)
-            // axios.defaults.headers.common[
-            //   "Authorization"
-            // ] = `Token ${res.data.key}`;
-            // props.history.push("/gamemap");
+            
           });
       };
     return (
