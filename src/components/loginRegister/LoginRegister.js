@@ -4,7 +4,7 @@ const Login = props => {
     const [loginForm, setLogin] = useState(false)
 
     return (
-        // Conditionally rendered  form
+        // Conditionally rendered form
         <div>
             <form className="form">
                 <h3>{loginForm ? "Login" : "Register"}</h3>
