@@ -7,22 +7,51 @@ const Login = props => {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     
-    const handleSubmit = event => {
-        event.preventDefault();
+    const regUser = {
+    username: userName,
+    password1: password,
+    password2: passwordConfirm
+        
+      };
+    const logUser = {
     
-        const user = {
-          username: userName,
-          password1: password,
-          password2: passwordConfirm
-        };
-        console.log(user)
+    username: userName,
+    password: password
+    
+    };
+  
+
+    const handleRegister = event => {
+        event.preventDefault();
+
+        console.log(regUser)
         axios
           .post(`https://lambda-mud-test.herokuapp.com/api/registration/`, {
-            ...user
+            ...regUser
           })
           .then(res => {
             console.log(res);
             console.log(res.data);
+            localStorage.setItem('token', res.data.key)
+            // axios.defaults.headers.common[
+            //   "Authorization"
+            // ] = `Token ${res.data.key}`;
+            // props.history.push("/gamemap");
+          });
+      };
+
+      const handleLogin = event => {
+        event.preventDefault();
+    
+        console.log(logUser)
+        axios
+          .post(`https://lambda-mud-test.herokuapp.com/api/login/`, {
+            ...logUser
+          })
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+            localStorage.setItem('token', res.data.key)
             // axios.defaults.headers.common[
             //   "Authorization"
             // ] = `Token ${res.data.key}`;
@@ -32,7 +61,7 @@ const Login = props => {
     return (
         // Conditionally rendered form
         <div>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={registerForm ? handleRegister : handleLogin}>
                 <h3>{registerForm ? "Register" : "Login"}</h3>
                 <label>Username</label>
                 <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
