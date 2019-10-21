@@ -2,53 +2,56 @@ import React,{useState,useEffect} from 'react'
 import Screen from './Game'
 import Login from './LoginRegister'
 import axios from 'axios'
+import status from '../helpers/transfer'
 
 function App(){
 
   const connector = axios
   const [token,setToken]=useState(null)
-  const [user,setUser]=useState(null)
+
+  const logout=async e=>{
+    connector.post('/api/logout/')
+    connector.defaults.headers.common['Authorization']=null
+    window.localStorage.removeItem('token')
+    setToken(null)
+    setUser({})
+  }
+
+  const [user,setUser]=useState({})
 
   //login
-  const login =async (user,pass)=>{
+  const login=async user=>{
     try {
-      let attempt = await connector.post('/api/login/',{username:user,password:pass})
-      console.log('attempt ',attempt)
+      let attempt = await connector.post('/api/login/',{...user})
       let data = await attempt.data
-      console.log('data ', data)
+      loginKey(data.key)
     } catch (error) {
-        console.error(error)
+        return status(false,error.response.data)
     }
   }
 
   const loginKey=async(tok)=>{
       connector.defaults.headers.common['Authorization']=`Token ${tok}`
+      window.localStorage.setItem('token',tok)
       setToken(tok)
   }
 
-  const register=async (user,pass,pass2)=>{
+  const register=async (user)=>{
     try {
-      let attempt = await connector.post('/api/registration/',{username:user,password1:pass,password2:pass2})
-      console.log('attempt ',attempt)
+      let attempt = await connector.post('/api/registration/',{...user})
       let data = await attempt.data
-      console.log('data ', data)
+      loginKey(data.key)     
     } catch (error) {
-      console.log('here');
-      console.log(error.request);
-      console.error(error.toJSON())
+      return status(false,error.response.data)
     }
   }
 
   const testLogin=e=>{
     return token!=null
   }
-
   
   if (process.env.NODE_ENV==='development') {
       connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'
-  }
-  if (window.localStorage.getItem('token')) {
-      loginKey(window.localStorage.getItem('token'))
   }
 
   useEffect(()=>{
@@ -59,7 +62,7 @@ function App(){
 
   if(testLogin()) {
     return (
-      <Screen connection={{connector,user}}/>  
+      <Screen connection={connector} user={user} setUser={setUser} logout={logout}/>  
     )
   }else{
     return <Login connection={{login,register}}/>
