@@ -1,6 +1,11 @@
 import React,{useState,useEffect} from 'react'
+<<<<<<< HEAD
 import Screen from './Game/Game'
 import Login from './loginRegister/LoginRegister'
+=======
+import Screen from './Game'
+import Login from './LoginRegister'
+>>>>>>> f5da65ba3471e33b699f8efcdf70e95fb8aaf792
 import axios from 'axios'
 import status from '../helpers/transfer'
 
@@ -57,9 +62,14 @@ function App(){
   useEffect(()=>{
     if (token==null && window.localStorage.getItem('token')!=null) {
       loginKey(window.localStorage.getItem('token'))
+<<<<<<< HEAD
       setUser(user)
     }
   },[token, user])
+=======
+    }
+  },[token])
+>>>>>>> f5da65ba3471e33b699f8efcdf70e95fb8aaf792
 
   if(testLogin()) {
     return (
