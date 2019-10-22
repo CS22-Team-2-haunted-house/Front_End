@@ -40,9 +40,38 @@ const Login = props => {
     console.log(logUser)
     props.connection.login(logUser)
     };
+
+    const lightning = () => {
+        const lightning = document.querySelector('.lightning')
+        lightning.classList.toggle('on')
+        setTimeout(function() {lightningOff() },30)
+    }
+    const lightningOff = () => {
+        const lightning = document.querySelector('.lightning')
+        lightning.classList.toggle('on')
+        setTimeout(function() {lightningOn() },30)
+    }
+    const lightningOn = () => {
+        const lightning = document.querySelector('.lightning')
+        lightning.classList.toggle('on')
+        setTimeout(function() {lightningOff2() },30)
+    }
+
+    const lightningOff2 = () => {
+        const lightning = document.querySelector('.lightning')
+        lightning.classList.toggle('on')
+        setTimeout(function() {toggleLightning() },30)
+    }
+
+    const toggleLightning = () => setTimeout(
+        function(){
+             lightning()
+            }, 6500);
+    toggleLightning()
     return (
         // Conditionally rendered form
         <div className="login">
+        <div className="lightning"></div>
             <form className="form" onSubmit={registerForm ? handleRegister : handleLogin}>
                 <h1>{registerForm ? "Register" : "Login"}</h1>
                 <label>Username</label>
