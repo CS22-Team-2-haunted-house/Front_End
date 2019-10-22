@@ -7,6 +7,8 @@ import {faArrowAltCircleLeft} from '@fortawesome/free-regular-svg-icons';
 import {faArrowAltCircleRight} from '@fortawesome/free-regular-svg-icons';
 function MoveBar(props) {
     console.log();
+
+
     return (
         <section className="movements">
             <section className="arrow-row">

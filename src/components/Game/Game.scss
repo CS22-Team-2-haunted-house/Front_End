@@ -30,11 +30,16 @@ h3,h2 {
     width: 90%;
     height: 12rem;
     transform: translateY(-10px);
+    font-family: 'Special Elite', cursive;
     & .content {
         width: 70%;
         border: 10px solid black;
         border-radius: 15px 0px 0px 15px;
         height: inherit;
+    }
+    & .err {
+        color: red;
+        text-decoration: underline;
     }
 }
 
