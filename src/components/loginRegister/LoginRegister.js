@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import './Login.css'
+import './Login.scss'
 const Login = props => {
     const [registerForm, setRegister] = useState(false)
     const [userName, setUsername] = useState("");

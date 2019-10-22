@@ -1,7 +1,7 @@
 import React from 'react'
 import Char from '../charScreen/char_screen'
 import status from '../../helpers/transfer'
-import './Game.css'
+import './Game.scss'
 function Game(props) {
 
     const getData=async (e)=>{
