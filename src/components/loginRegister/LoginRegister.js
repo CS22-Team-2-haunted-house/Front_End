@@ -41,33 +41,33 @@ const Login = props => {
     props.connection.login(logUser)
     };
 
-    const lightning = () => {
-        const lightning = document.querySelector('.lightning')
-        lightning.classList.toggle('on')
-        setTimeout(function() {lightningOff() },30)
-    }
-    const lightningOff = () => {
-        const lightning = document.querySelector('.lightning')
-        lightning.classList.toggle('on')
-        setTimeout(function() {lightningOn() },30)
-    }
-    const lightningOn = () => {
-        const lightning = document.querySelector('.lightning')
-        lightning.classList.toggle('on')
-        setTimeout(function() {lightningOff2() },30)
-    }
+    // const lightning = () => {
+    //     const lightning = document.querySelector('.lightning')
+    //     lightning.classList.toggle('on')
+    //     setTimeout(function() {lightningOff() },30)
+    // }
+    // const lightningOff = () => {
+    //     const lightning = document.querySelector('.lightning')
+    //     lightning.classList.toggle('on')
+    //     setTimeout(function() {lightningOn() },30)
+    // }
+    // const lightningOn = () => {
+    //     const lightning = document.querySelector('.lightning')
+    //     lightning.classList.toggle('on')
+    //     setTimeout(function() {lightningOff2() },30)
+    // }
 
-    const lightningOff2 = () => {
-        const lightning = document.querySelector('.lightning')
-        lightning.classList.toggle('on')
-        setTimeout(function() {toggleLightning() },30)
-    }
+    // const lightningOff2 = () => {
+    //     const lightning = document.querySelector('.lightning')
+    //     lightning.classList.toggle('on')
+    //     setTimeout(function() {toggleLightning() },30)
+    // }
 
-    const toggleLightning = () => setTimeout(
-        function(){
-             lightning()
-            }, 6500);
-    toggleLightning()
+    // const toggleLightning = () => setTimeout(
+    //     function(){
+    //          lightning()
+    //         }, 10500);
+    // toggleLightning()
     return (
         // Conditionally rendered form
         <div className="login">

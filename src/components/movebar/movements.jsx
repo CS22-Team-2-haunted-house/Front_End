@@ -15,8 +15,8 @@ function MoveBar(props) {
 
             </section>
             <section className="arrow-row__center">
-                <FontAwesomeIcon className="arrow"  onClick={()=>props.move('e')} icon={faArrowAltCircleLeft} />
-                <FontAwesomeIcon className="arrow"  onClick={()=>props.move('w')} icon={faArrowAltCircleRight} />
+                <FontAwesomeIcon className="arrow"  onClick={()=>props.move('w')} icon={faArrowAltCircleLeft} />
+                <FontAwesomeIcon className="arrow"  onClick={()=>props.move('e')} icon={faArrowAltCircleRight} />
             </section>
             <section className="arrow-row">
             <FontAwesomeIcon className="arrow"  onClick={()=>props.move('s')} icon={faArrowAltCircleDown} />
