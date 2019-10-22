@@ -52,10 +52,10 @@ const Login = props => {
                 {registerForm  && 
                 <input type="password" placeholder="Confirm Password" onChange={(e) => setPasswordConfirm(e.target.value)}/> }
                 {err  && <p className="error">Passwords do not match</p> }
-                <button>Submit</button>
+                <button className="logBtn">Submit</button>
             </form>
             {registerForm === false && <p>Not yet registered?</p> }
-            <button onClick={() => {
+            <button className="logBtn logBtn__register" onClick={() => {
                 setRegister(!registerForm)
                 setErr(false)
             }}>{registerForm ? "Go Back" : "Register"}</button>

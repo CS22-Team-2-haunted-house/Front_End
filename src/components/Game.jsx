@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import Char from './char_screen'
 import status from '../helpers/transfer'
-import MoveBar from './movebar/movements'
+import MoveBar from './movebar/Movements'
 
 function Game(props) {
 

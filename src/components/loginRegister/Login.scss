@@ -14,15 +14,21 @@ label {
     margin-top: 1rem;
 }
 
-button {
+.logBtn {
     cursor: pointer;
     padding: 1rem;
-    width: 45%;
+    width: 15rem;
     margin: 0 auto;
     display: block;
     border: none;
     border-radius: 15px;
     margin-top: 1rem;
+    background-color: #F95604;
+    color: black;
+    &__register {
+        background-color: black;
+        color: #F95604;
+    }
 }
 
 .error {
