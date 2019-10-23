@@ -1,12 +1,14 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Char from '../charScreen/char_screen'
 import status from '../../helpers/transfer'
 import './Game.scss'
 import Movebar from '../movebar/Movements'
 import Map from '../Map/Map'
+import { props } from 'bluebird'
 
 function Game({connection,setUser,logout,user}) {
-
+    const [loading, setLoading] = useState(false);
+    
     const getData=async (e)=>{
         try {
             let request = await connection.get('/api/adv/init/')
@@ -34,9 +36,14 @@ function Game({connection,setUser,logout,user}) {
 
     const move=async e=>{
         try {
+            setLoading(true)
+            // console.log('hello')
             let request = await connection.post('/api/adv/move',{direction: e})
             let data = request.data
             setUser({...data})
+            setLoading(false)
+            // console.log(loading)
+           
         } catch (error) {
             
         }
@@ -57,7 +64,7 @@ function Game({connection,setUser,logout,user}) {
                     <p className="desc">{user.description}</p>
                     <p className="err">{user.error_msg}</p>
                 </div>
-                <Movebar move={move}/>
+                <Movebar move={move} loading={loading}/>
             </div>
          
         </div>

@@ -101,6 +101,7 @@ function Map({connection,user}) {
 
                     }
                 }
+                
                 if (opts.e_to>0) {
                     walls-=2
                     
@@ -143,6 +144,7 @@ function Map({connection,user}) {
 
                     }
                 }
+                console.log('hello world')
                 ctx.drawImage(images[walls],curr.x,curr.y)
                 if (opts.title==user.title) {
                     let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
