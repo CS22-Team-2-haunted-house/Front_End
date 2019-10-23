@@ -8,7 +8,22 @@ import {faArrowAltCircleRight} from '@fortawesome/free-regular-svg-icons';
 function MoveBar(props) {
     console.log();
 
+    const arrows = document.querySelectorAll('.svg-inline--fa')
+ 
+    console.log(arrows.length)
+    
+    for (let i=0; i < arrows.length; i++) {
+ 
+        arrows[i].addEventListener('mousedown',() => {
+            arrows[i].style.transform = 'scale(.8)'
 
+        })
+        window.addEventListener('mouseup', () => {
+            arrows[i].style.transform = 'scale(1)'
+        })
+        
+    }
+    
     return (
         <section className="movements">
             <section className="arrow-row">
