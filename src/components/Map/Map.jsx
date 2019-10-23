@@ -1,4 +1,4 @@
-import React,{useEffect, useRef, useState,useReducer} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import none from '../../images/0.jpg'
 import top from '../../images/1.jpg'
 import right from '../../images/2.jpg'
