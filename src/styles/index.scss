@@ -15,4 +15,7 @@ code {
 button {
   cursor: pointer;
   font-family: 'Special Elite', cursive;
+  &:hover {
+    transform: scale(.9);
+  }
 }

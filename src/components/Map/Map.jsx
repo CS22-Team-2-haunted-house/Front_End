@@ -40,7 +40,7 @@ function Map({connection}) {
         }
     },[])
 
-    //set context when it's ready
+    ///set context when it's ready
     useEffect(()=>{
         if (ctx==null && canvas.current!=null) {
             setCtx(canvas.current.getContext('2d'))

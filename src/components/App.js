@@ -49,6 +49,11 @@ function App(){
   const testLogin=e=>{
     return token!=null
   }
+
+  const buttons = document.querySelectorAll('button');
+  console.log(buttons)
+
+  
   
   if (process.env.NODE_ENV==='development') {
       connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'

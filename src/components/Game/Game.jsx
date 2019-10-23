@@ -30,7 +30,8 @@ function Game(props) {
         init()
     },[])
 
-    
+    // const button = document.getElementsByClassName('logoutBtn');
+    // console.log(button)
 
     const move=async e=>{
         try {
