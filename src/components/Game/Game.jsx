@@ -24,7 +24,7 @@ function Game({connection,setUser,logout,user}) {
                 let data = request.data
                 setUser({...data})
             } catch (error) {
-                return status(false,error.response.data)
+                logout()
             }
         }
         init()
@@ -45,7 +45,7 @@ function Game({connection,setUser,logout,user}) {
     return (
         <div className="game">
             <p>Haunted House</p>
-            <Map connection={connection}/>
+            <Map connection={connection} user={user}/>
           
             <div className="content-container">
                 <div className="content">

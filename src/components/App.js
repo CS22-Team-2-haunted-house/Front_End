@@ -26,7 +26,7 @@ function App(){
       let data = await attempt.data
       loginKey(data.key)
     } catch (error) {
-        return status(false,error.response.data)
+        return new status(false,error.response.data)
     }
   }
 
@@ -42,7 +42,7 @@ function App(){
       let data = await attempt.data
       loginKey(data.key)     
     } catch (error) {
-      return status(false,error.response.data)
+      return new status(false,error.response.data)
     }
   }
 
