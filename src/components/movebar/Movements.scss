@@ -13,8 +13,11 @@
 
 .svg-inline--fa {
     font-size: 3rem;
-    color: darken(#F95604, 20%);
     cursor: pointer;
+    color: #F95604;
+    &.disabled {
+        color: #953302;
+    }
 }
 
 .arrow-row {

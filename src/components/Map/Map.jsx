@@ -1,4 +1,4 @@
-import React,{useEffect, useRef, useState,useReducer} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import none from '../../images/0.jpg'
 import top from '../../images/1.jpg'
 import right from '../../images/2.jpg'
@@ -21,35 +21,13 @@ const   SPRITE_HEIGHT=64,
         SPRITE_WIDTH=40
 
 
-function Map({connection,user,props}) {
-    let [north, setNorth] = useState(false);
-    let [south, setSouth] = useState(false);
-    let [east, setEast] = useState(false);
-    let [west, setWest] = useState(false);
-    let [rooms,setRooms] = useState([])
+function Map({user,rooms}) {
+    
     let canvas = useRef(null)
     let [ctx,setCtx]=useState(null)
     let map = useRef(null)
     const [images,setImages]=useState([])
     const userArt=useRef(null)
-    const [flipper,setFlipper]=useState(true)
-
-    //initial load
-    useEffect(()=>{
-      
-        let grabber = async ()=>{
-            try {
-                let req = await connection.get('/api/adv/rooms/')
-                let data = await req.data
-                setRooms(JSON.parse(data.rooms))
-            } catch (error) {
-                console.error({...error});
-            }
-        }
-        if(rooms.length==0){
-            grabber()
-        }
-    },[])
     
     //set context when it's ready
     useEffect(()=>{
@@ -105,7 +83,6 @@ function Map({connection,user,props}) {
 
                     }
                 }
-                
                 if (opts.e_to>0) {
                     walls-=2
                     
@@ -147,8 +124,7 @@ function Map({connection,user,props}) {
                         })
 
                     }
-                } 
-                
+                }
                 ctx.drawImage(images[walls],curr.x,curr.y)
                 if (opts.title==user.title) {
                     let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
@@ -162,33 +138,33 @@ function Map({connection,user,props}) {
         }
     },[rooms,ctx,user])
     
-    let current = rooms.filter(room => room.fields.title === user.title && room.fields.description === user.description)
-    console.log(current[0])
-    current = current[0]
-    console.log(current && current.fields.n_to)
-    if (current && current.fields.n_to === 0) {
-        setNorth(false)
-    } else {
-        setNorth(true)
-    }
+    // let current = rooms.filter(room => room.fields.title === user.title && room.fields.description === user.description)
+    // console.log(current[0])
+    // current = current[0]
+    // console.log(current && current.fields.n_to)
+    // if (current && current.fields.n_to === 0) {
+    //     setNorth(false)
+    // } else {
+    //     setNorth(true)
+    // }
 
-    if (current && current.fields.s_to === 0) {
-        setSouth(false)
-    } else {
-        setSouth(true)
-    }
+    // if (current && current.fields.s_to === 0) {
+    //     setSouth(false)
+    // } else {
+    //     setSouth(true)
+    // }
 
-    if (current && current.fields.e_to === 0) {
-        setEast(false)
-    } else {
-        setEast(true)
-    }
+    // if (current && current.fields.e_to === 0) {
+    //     setEast(false)
+    // } else {
+    //     setEast(true)
+    // }
 
-    if (current && current.fields.w_to === 0) {
-        setWest(false)
-    } else {
-        setWest(true)
-    }
+    // if (current && current.fields.w_to === 0) {
+    //     setWest(false)
+    // } else {
+    //     setWest(true)
+    // }
 
     return (
         <div className="map" ref={map}>
