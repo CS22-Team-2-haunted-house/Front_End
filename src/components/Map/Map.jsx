@@ -21,8 +21,11 @@ const   SPRITE_HEIGHT=64,
         SPRITE_WIDTH=40
 
 
-function Map({connection,user}) {
-    
+function Map({connection,user,props}) {
+    let [north, setNorth] = useState(false);
+    let [south, setSouth] = useState(false);
+    let [east, setEast] = useState(false);
+    let [west, setWest] = useState(false);
     let [rooms,setRooms] = useState([])
     let canvas = useRef(null)
     let [ctx,setCtx]=useState(null)
@@ -33,6 +36,7 @@ function Map({connection,user}) {
 
     //initial load
     useEffect(()=>{
+      
         let grabber = async ()=>{
             try {
                 let req = await connection.get('/api/adv/rooms/')
@@ -143,8 +147,8 @@ function Map({connection,user}) {
                         })
 
                     }
-                }
-                console.log('hello world')
+                } 
+                
                 ctx.drawImage(images[walls],curr.x,curr.y)
                 if (opts.title==user.title) {
                     let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
@@ -157,6 +161,34 @@ function Map({connection,user}) {
             
         }
     },[rooms,ctx,user])
+    
+    let current = rooms.filter(room => room.fields.title === user.title && room.fields.description === user.description)
+    console.log(current[0])
+    current = current[0]
+    console.log(current && current.fields.n_to)
+    if (current && current.fields.n_to === 0) {
+        setNorth(false)
+    } else {
+        setNorth(true)
+    }
+
+    if (current && current.fields.s_to === 0) {
+        setSouth(false)
+    } else {
+        setSouth(true)
+    }
+
+    if (current && current.fields.e_to === 0) {
+        setEast(false)
+    } else {
+        setEast(true)
+    }
+
+    if (current && current.fields.w_to === 0) {
+        setWest(false)
+    } else {
+        setWest(true)
+    }
 
     return (
         <div className="map" ref={map}>

@@ -10,7 +10,7 @@ function MoveBar(props) {
 
     const arrows = document.querySelectorAll('.svg-inline--fa')
  
-    console.log(arrows.length)
+ 
     
     
    //
@@ -41,7 +41,6 @@ function MoveBar(props) {
     return (
         <section className="movements">
             <section className="arrow-row">
-                {console.log(props.loading)}
                 <FontAwesomeIcon className="arrow" onClick={()=> {
                     if (props.loading === false) {
                         props.move('n') 

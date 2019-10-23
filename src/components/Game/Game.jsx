@@ -8,7 +8,10 @@ import { props } from 'bluebird'
 
 function Game({connection,setUser,logout,user}) {
     const [loading, setLoading] = useState(false);
-    
+    let [north, setNorth] = useState(false);
+    let [south, setSouth] = useState(false);
+    let [east, setEast] = useState(false);
+    let [west, setWest] = useState(false);
     const getData=async (e)=>{
         try {
             let request = await connection.get('/api/adv/init/')
@@ -32,6 +35,8 @@ function Game({connection,setUser,logout,user}) {
         init()
     },[connection,setUser])
 
+   
+
     
 
     const move=async e=>{
@@ -52,7 +57,7 @@ function Game({connection,setUser,logout,user}) {
     return (
         <div className="game">
             <p>Haunted House</p>
-            <Map connection={connection} user={user}/>
+            <Map connection={connection} user={user} north={north} />
           
             <div className="content-container">
                 <div className="content">
