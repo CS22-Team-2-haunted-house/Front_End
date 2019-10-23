@@ -13,7 +13,7 @@ function MoveBar(props) {
     console.log(arrows.length)
     
     
-   
+   //
     for (let i=0; i < arrows.length; i++) {
         if (props.loading === true) {
             arrows[i].style.color = '#953302'
