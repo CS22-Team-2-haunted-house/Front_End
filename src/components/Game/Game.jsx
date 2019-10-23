@@ -3,6 +3,9 @@ import Char from '../charScreen/char_screen'
 import status from '../../helpers/transfer'
 import './Game.scss'
 import Movebar from '../movebar/Movements'
+import Chat from '../chat/Chat'
+import { ChatManager, withChatkit, ChatkitProvider, TokenProvider } from '@pusher/chatkit-client-react'
+import {tokenUrl, instanceLocator} from '../chat/config'
 function Game(props) {
 
     const getData=async (e)=>{
@@ -40,11 +43,20 @@ function Game(props) {
             
         }
     }
-
+    const WelcomeMessage = withChatkit(props => {
+        return (
+          <div>
+            {props.chatkit.isLoading
+              ? 'Connecting to Chatkit...'
+              : `Hello ${props.chatkit.currentUser.name}!`}
+          </div>
+        );
+      });
     return (
         <div className="game">
             <p>Haunted House</p>
             <div className="map">
+                
             
             </div>
           
