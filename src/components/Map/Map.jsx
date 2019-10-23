@@ -100,6 +100,7 @@ function Map({connection,user}) {
 
                     }
                 }
+                
                 if (opts.e_to>0) {
                     walls-=2
                     
