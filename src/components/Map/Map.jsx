@@ -1,21 +1,21 @@
 import React,{useEffect, useRef, useState,useReducer} from 'react'
-import none from '../../images/0.png'
-import top from '../../images/1.png'
-import right from '../../images/2.png'
-import rightTop from '../../images/3.png'
-import bottom from '../../images/4.png'
-import bottomTop from '../../images/5.png'
-import bottomRight from '../../images/6.png';
-import fromLeftOnly from '../../images/7.png'
-import left from '../../images/8.png'
-import leftTop from '../../images/9.png'
-import leftRight from '../../images/10.png'
-import bottomOnly from '../../images/11.png'
-import leftBottom from '../../images/12.png'
-import rightOnly from '../../images/13.png'
-import topOnly from '../../images/14.png'
+import none from '../../images/0.jpg'
+import top from '../../images/1.jpg'
+import right from '../../images/2.jpg'
+import rightTop from '../../images/3.jpg'
+import bottom from '../../images/4.jpg'
+import bottomTop from '../../images/5.jpg'
+import bottomRight from '../../images/6.jpg';
+import fromLeftOnly from '../../images/7.jpg'
+import left from '../../images/8.jpg'
+import leftTop from '../../images/9.jpg'
+import leftRight from '../../images/10.jpg'
+import bottomOnly from '../../images/11.jpg'
+import leftBottom from '../../images/12.jpg'
+import rightOnly from '../../images/13.jpg'
+import topOnly from '../../images/14.jpg'
 import './Map.scss'
-const IMAGE_SIZE=256
+const IMAGE_SIZE=128
 
 
 function Map({connection}) {
