@@ -12,31 +12,69 @@ function MoveBar(props) {
  
     console.log(arrows.length)
     
+    
+   
     for (let i=0; i < arrows.length; i++) {
- 
+        if (props.loading === true) {
+            arrows[i].style.color = '#953302'
+        } else {
+            arrows[i].style.color = '#F95604'
+        }
         arrows[i].addEventListener('mousedown',() => {
-            arrows[i].style.transform = 'scale(.8)'
-
+            if (props.loading === false) {
+                arrows[i].style.transform = 'scale(.8)'
+            } else {
+                arrows[i].style.transform = 'scale(1)'
+            }
+                
         })
         window.addEventListener('mouseup', () => {
             arrows[i].style.transform = 'scale(1)'
-        })
-        
+        })   
     }
+
+    
+    
+    
+    
     
     return (
         <section className="movements">
             <section className="arrow-row">
-        
-                <FontAwesomeIcon className="arrow" onClick={()=>props.move('n') } icon={faArrowAltCircleUp} />
+                {console.log(props.loading)}
+                <FontAwesomeIcon className="arrow" onClick={()=> {
+                    if (props.loading === false) {
+                        props.move('n') 
+                        console.log('moved north')
+                    }
+                   
+                }} icon={faArrowAltCircleUp} />
 
             </section>
             <section className="arrow-row__center">
-                <FontAwesomeIcon className="arrow"  onClick={()=>props.move('w')} icon={faArrowAltCircleLeft} />
-                <FontAwesomeIcon className="arrow"  onClick={()=>props.move('e')} icon={faArrowAltCircleRight} />
+                <FontAwesomeIcon className="arrow"  onClick={()=> {
+                    if (props.loading === false) {
+                        props.move('w') 
+                        console.log('moved west')
+                    }
+                   
+                }} icon={faArrowAltCircleLeft} />
+                <FontAwesomeIcon className="arrow"  onClick={()=> {
+                    if (props.loading === false) {
+                        props.move('e') 
+                        console.log('moved east')
+                    }
+                   
+                }} icon={faArrowAltCircleRight} />
             </section>
             <section className="arrow-row">
-            <FontAwesomeIcon className="arrow"  onClick={()=>props.move('s')} icon={faArrowAltCircleDown} />
+            <FontAwesomeIcon className="arrow"  onClick={()=> {
+                if (props.loading === false) {
+                    props.move('s') 
+                    console.log('moved south')
+                }
+               
+            }} icon={faArrowAltCircleDown} />
             </section>
         </section>
     )
