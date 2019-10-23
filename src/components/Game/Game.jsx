@@ -4,10 +4,11 @@ import status from '../../helpers/transfer'
 import './Game.scss'
 import Movebar from '../movebar/Movements'
 import Map from '../Map/Map'
-import { props } from 'bluebird'
+// import { props } from 'bluebird'
 
 function Game({connection,setUser,logout,user}) {
     const [loading, setLoading] = useState(false);
+    let [rooms,setRooms] = useState([])
     
     const getData=async (e)=>{
         try {
@@ -32,6 +33,21 @@ function Game({connection,setUser,logout,user}) {
         init()
     },[connection,setUser])
 
+    //initial load
+    useEffect(()=>{
+        let grabber = async ()=>{
+            try {
+                let req = await connection.get('/api/adv/rooms/')
+                let data = await req.data
+                setRooms(JSON.parse(data.rooms))
+            } catch (error) {
+                console.error({...error});
+            }
+        }
+        if(rooms.length==0){
+            grabber()
+        }
+    },[])
     
 
     const move=async e=>{
@@ -52,7 +68,7 @@ function Game({connection,setUser,logout,user}) {
     return (
         <div className="game">
             <p>Haunted House</p>
-            <Map connection={connection} user={user}/>
+            <Map connection={connection} user={user} rooms={rooms}/>
           
             <div className="content-container">
                 <div className="content">
@@ -64,7 +80,7 @@ function Game({connection,setUser,logout,user}) {
                     <p className="desc">{user.description}</p>
                     <p className="err">{user.error_msg}</p>
                 </div>
-                <Movebar move={move} loading={loading}/>
+                <Movebar move={move} loading={loading} rooms={rooms}/>
             </div>
          
         </div>

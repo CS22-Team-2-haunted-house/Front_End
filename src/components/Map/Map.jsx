@@ -21,31 +21,13 @@ const   SPRITE_HEIGHT=64,
         SPRITE_WIDTH=40
 
 
-function Map({connection,user}) {
+function Map({user,rooms}) {
     
-    let [rooms,setRooms] = useState([])
     let canvas = useRef(null)
     let [ctx,setCtx]=useState(null)
     let map = useRef(null)
     const [images,setImages]=useState([])
     const userArt=useRef(null)
-    const [flipper,setFlipper]=useState(true)
-
-    //initial load
-    useEffect(()=>{
-        let grabber = async ()=>{
-            try {
-                let req = await connection.get('/api/adv/rooms/')
-                let data = await req.data
-                setRooms(JSON.parse(data.rooms))
-            } catch (error) {
-                console.error({...error});
-            }
-        }
-        if(rooms.length==0){
-            grabber()
-        }
-    },[])
     
     //set context when it's ready
     useEffect(()=>{
@@ -101,7 +83,6 @@ function Map({connection,user}) {
 
                     }
                 }
-                
                 if (opts.e_to>0) {
                     walls-=2
                     
@@ -144,7 +125,6 @@ function Map({connection,user}) {
 
                     }
                 }
-                console.log('hello world')
                 ctx.drawImage(images[walls],curr.x,curr.y)
                 if (opts.title==user.title) {
                     let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
