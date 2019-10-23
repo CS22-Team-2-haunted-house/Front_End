@@ -29,6 +29,7 @@ function Map({connection,user}) {
     let map = useRef(null)
     const [images,setImages]=useState([])
     const userArt=useRef(null)
+    const [flipper,setFlipper]=useState(true)
 
     //initial load
     useEffect(()=>{
@@ -45,7 +46,7 @@ function Map({connection,user}) {
             grabber()
         }
     },[])
-
+    
     //set context when it's ready
     useEffect(()=>{
         if (ctx==null && canvas.current!=null) {
@@ -53,10 +54,11 @@ function Map({connection,user}) {
             setImages(Array.from(map.current.querySelectorAll('img')))
         }
     },[canvas,ctx])
-
+    
     //make map when ready
     useEffect(()=>{
-        if (ctx!=null && rooms.length>0) {
+        if (ctx!=null && rooms.length>0 && 'title' in user) {
+
             //data for aquisition
             let compX=map.current.clientWidth
             let compY=map.current.clientHeight
@@ -68,15 +70,14 @@ function Map({connection,user}) {
             canvas.current.width=compX*(compX/map.current.offsetWidth)
 
             let startX = Math.floor(maxX/2)
-            let startY = Math.round(maxY-IMAGE_SIZE)
+            let startY = Math.round(maxY/2)
 
             let Offset = IMAGE_SIZE/2
 
             startX-=Offset
-
-            let order=[{room:rooms[0],x:startX,y:startY}]
+            startY-=Offset
+            let order=[{room:rooms.find(room=>room.fields.title==user.title),x:startX,y:startY}]
             let done=[]
-
 
             while (order.length>0) {
                 let curr=order.pop()
@@ -123,7 +124,7 @@ function Map({connection,user}) {
                         order.push({
                             room,
                             x:curr.x,
-                            y:curr.y-IMAGE_SIZE
+                            y:curr.y+IMAGE_SIZE
                         })
 
                     }
@@ -143,7 +144,7 @@ function Map({connection,user}) {
                     }
                 }
                 ctx.drawImage(images[walls],curr.x,curr.y)
-                if (user!={}&&opts.title==user.title) {
+                if (opts.title==user.title) {
                     let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
                         userposy=curr.y+Offset-(SPRITE_HEIGHT/2)
                     ctx.drawImage(userArt.current,userposx,userposy)
