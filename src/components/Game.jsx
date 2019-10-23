@@ -3,13 +3,13 @@ import Char from './char_screen'
 import status from '../helpers/transfer'
 import MoveBar from './movebar/movements'
 
-function Game(props) {
+function Game({user,setUser,logout}) {
 
     const getData=async (e)=>{
         try {
-            let request = await props.connection.get('/api/adv/init/')
+            let request = await connection.get('/api/adv/init/')
             let data = await request.data
-            props.setUser({...data})
+            setUser({...data})
         } catch (error) {
             return new status(false,error.response.data)
         }
@@ -17,9 +17,9 @@ function Game(props) {
 
     const init=async e=>{
         try {
-            let request = await props.connection.get('/api/adv/init/')
+            let request = await connection.get('/api/adv/init/')
             let data = request.data
-            props.setUser({...data})
+            setUser({...data})
         } catch (error) {
             return status(false,error.response.data)
         }
@@ -27,19 +27,19 @@ function Game(props) {
 
     const move=async e=>{
         try {
-            let request = await props.connection.post('/api/adv/move',{direction:e})
+            let request = await connection.post('/api/adv/move',{direction:e})
             let data = request.data
-            props.setUser({...data})
+            setUser({...data})
         } catch (error) {
             
         }
     }
 
     useEffect(()=>{
-        if (props.user.title==null) {
+        if (user.title==null) {
             init()
         }
-    },[props.user])
+    },[user])
 
     return (
         <div>
@@ -47,14 +47,14 @@ function Game(props) {
             <p>user Object:
                 <ul>
 
-                {Object.keys(props.user).map((keyname,i)=>(
+                {Object.keys(user).map((keyname,i)=>(
                     <li>
-                        {keyname}: {props.user[keyname]}
+                        {keyname}: {user[keyname]}
                     </li>
                 ))}
                 </ul>
             </p>
-            <button onClick={props.logout}>
+            <button onClick={logout}>
                 logout
             </button>
             <button onClick={getData}>
@@ -64,10 +64,10 @@ function Game(props) {
                 Initialize
             </button>
             <p>
-                Room Title: {props.user.title || "Empty"}
+                Room Title: {user.title || "Empty"}
             </p>
             <p>
-                Desc: {props.user.description}
+                Desc: {user.description}
             </p>
             <MoveBar move={move}/>
         </div>

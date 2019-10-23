@@ -14,33 +14,39 @@ import bottomOnly from '../../images/11.jpg'
 import leftBottom from '../../images/12.jpg'
 import rightOnly from '../../images/13.jpg'
 import topOnly from '../../images/14.jpg'
+import sprite from '../../images/char.png'
 import './Map.scss'
-import axios from 'axios'
-const IMAGE_SIZE=128
+const   IMAGE_SIZE=128
+const   SPRITE_HEIGHT=64,
+        SPRITE_WIDTH=40
 
 
-function Map({connection}) {
+function Map({connection,user}) {
     
     let [rooms,setRooms] = useState([])
     let canvas = useRef(null)
     let [ctx,setCtx]=useState(null)
     let map = useRef(null)
     const [images,setImages]=useState([])
+    const userArt=useRef(null)
 
     //initial load
-    useEffect((connection)=>{
+    useEffect(()=>{
+        let grabber = async ()=>{
+            try {
+                let req = await connection.get('/api/adv/rooms/')
+                let data = await req.data
+                setRooms(JSON.parse(data.rooms))
+            } catch (error) {
+                console.error({...error});
+            }
+        }
         if(rooms.length==0){
-            axios.get('https://lambda-mud-test.herokuapp.com/api/adv/rooms')
-            .then(res => {
-                setRooms(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            grabber()
         }
     },[])
 
-    ///set context when it's ready
+    //set context when it's ready
     useEffect(()=>{
         if (ctx==null && canvas.current!=null) {
             setCtx(canvas.current.getContext('2d'))
@@ -61,7 +67,7 @@ function Map({connection}) {
             canvas.current.height=compY*(compY/map.current.offsetHeight)
             canvas.current.width=compX*(compX/map.current.offsetWidth)
 
-            let startX = Math.round(maxX/2)
+            let startX = Math.floor(maxX/2)
             let startY = Math.round(maxY-IMAGE_SIZE)
 
             let Offset = IMAGE_SIZE/2
@@ -70,7 +76,6 @@ function Map({connection}) {
 
             let order=[{room:rooms[0],x:startX,y:startY}]
             let done=[]
-
 
 
             while (order.length>0) {
@@ -137,16 +142,22 @@ function Map({connection}) {
 
                     }
                 }
+                console.log('hello world')
                 ctx.drawImage(images[walls],curr.x,curr.y)
+                if (user!={}&&opts.title==user.title) {
+                    let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
+                        userposy=curr.y+Offset-(SPRITE_HEIGHT/2)
+                    ctx.drawImage(userArt.current,userposx,userposy)
+                }else{
+                }
             }
         }else{
             
         }
-    },[rooms,ctx])
+    },[rooms,ctx,user])
 
     return (
         <div className="map" ref={map}>
-            {console.log(rooms)}
             <canvas ref={canvas}/>
             <img src={none} className="loaded" alt=""/>
             <img src={top} className="loaded" alt=""/>
@@ -163,6 +174,7 @@ function Map({connection}) {
             <img src={leftBottom} className="loaded" alt=""/>
             <img src={rightOnly} className="loaded" alt=""/>
             <img src={topOnly} className="loaded" alt=""/>
+            <img src={sprite} alt="" className="loaded" ref={userArt} id="sprite"/>
         </div>
     )
 }
