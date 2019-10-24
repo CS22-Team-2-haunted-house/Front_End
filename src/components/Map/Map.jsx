@@ -58,14 +58,14 @@ function Map({user,rooms}) {
 
             startX-=Offset
             startY-=Offset
-            let order=[{room:rooms.find(room=>room.fields.title==user.title),x:startX,y:startY}]
+            let order=[{room:rooms.find(room=>room.title==user.title),x:startX,y:startY}]
             let done=[]
 
             while (order.length>0) {
                 let curr=order.pop()
                 done.push(curr.room.pk)
                 
-                let opts = curr.room.fields
+                let opts = curr.room
 
                 let walls=15
                 
