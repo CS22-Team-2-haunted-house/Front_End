@@ -72,7 +72,7 @@ function Game({connection,setUser,logout,user}) {
     ////////  disabling individual arrows if direction is not available // //////
 
     // filter through rooms and grab the one that === the title and description of the user's position
-    let current = rooms.filter(room => room.fields.title === user.title && room.fields.description === user.description)
+    let current = rooms.filter(room => room.title === user.title && room.description === user.description)
     
     // it is set inside an object and is the only element, set it to current[0] for convenience 
     current = current[0]
@@ -80,7 +80,7 @@ function Game({connection,setUser,logout,user}) {
     
     // "current && " <--- needed because current is loaded in useEffect
     ///content is inside "fields" object
-    if (current && current.fields.n_to === 0) { //if current room's 'n_to' points to 0, it is unavailable
+    if (current && current.n_to === 0) { //if current room's 'n_to' points to 0, it is unavailable
            // using local storage as using a state cause an infinite loop
             localStorage.setItem('north', 'false') // set storage of north to false
             
@@ -90,19 +90,19 @@ function Game({connection,setUser,logout,user}) {
             localStorage.setItem('north', 'true')
         }
     
-        if (current && current.fields.s_to === 0) {
+        if (current && current.s_to === 0) {
             localStorage.setItem('south', 'false')
         } else {
             localStorage.setItem('south', 'true')
         }
     
-        if (current && current.fields.e_to === 0) {
+        if (current && current.e_to === 0) {
             localStorage.setItem('east', 'false')
         } else {
             localStorage.setItem('east', 'true')
         }
     
-        if (current && current.fields.w_to === 0) {
+        if (current && current.w_to === 0) {
             localStorage.setItem('west', 'false')
         } else {
             localStorage.setItem('west', 'true')

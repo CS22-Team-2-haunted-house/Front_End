@@ -42,7 +42,6 @@ function MoveBar(props) {
                 <FontAwesomeIcon className="arrow" onClick={()=> {
                     if (props.loading === false && localStorage.getItem('north') === 'true') {
                         props.move('n') 
-                        console.log('moved north')
                     } 
                    
                 }} icon={faArrowAltCircleUp} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleUp} /> }
