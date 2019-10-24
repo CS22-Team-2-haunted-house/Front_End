@@ -36,8 +36,10 @@ function MoveBar(props) {
     return (
         <section className="movements">
             <section className="arrow-row">
+              
                 {localStorage.getItem('north') === 'true' ?
-                
+                //if going north is true display active arrow, if false display disabled arrow
+                //***  repeat for all arrows/
                 <FontAwesomeIcon className="arrow" onClick={()=> {
                     if (props.loading === false && localStorage.getItem('north') === 'true') {
                         props.move('n') 

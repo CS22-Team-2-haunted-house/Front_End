@@ -69,17 +69,24 @@ function Game({connection,setUser,logout,user}) {
         }
     }
 
-    ///disabling individual arrows //
+    ////////  disabling individual arrows if direction is not available // //////
+
+    // filter through rooms and grab the one that === the title and description of the user's position
     let current = rooms.filter(room => room.fields.title === user.title && room.fields.description === user.description)
-    // console.log(current[0])
+    
+    // it is set inside an object and is the only element, set it to current[0] for convenience 
     current = current[0]
-    // console.log(current && current.fields.n_to)
-    if (current && current.fields.n_to === 0) {
-           // setNorth('true')
-            localStorage.setItem('north', 'false')
-            console.log(north)
+
+    
+    // "current && " <--- needed because current is loaded in useEffect
+    ///content is inside "fields" object
+    if (current && current.fields.n_to === 0) { //if current room's 'n_to' points to 0, it is unavailable
+           // using local storage as using a state cause an infinite loop
+            localStorage.setItem('north', 'false') // set storage of north to false
+            
+        /// repeat pattern below
         } else {
-            console.log('yes')
+          
             localStorage.setItem('north', 'true')
         }
     
