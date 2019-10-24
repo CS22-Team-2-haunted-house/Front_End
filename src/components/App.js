@@ -51,13 +51,14 @@ function App(){
   }
 
   const buttons = document.querySelectorAll('button');
-  console.log(buttons)
 
   
   
-  if (process.env.NODE_ENV==='development') {
-      connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'
-  }
+  // if (process.env.NODE_ENV==='development') {
+  //     connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'
+  // }else{
+      connector.defaults.baseURL='https://haunted-house-backend.herokuapp.com'
+  // }
 
   useEffect(()=>{
     if (token==null && window.localStorage.getItem('token')!=null) {

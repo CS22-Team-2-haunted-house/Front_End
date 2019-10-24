@@ -61,22 +61,21 @@ function Map({user,rooms}) {
 
             startX-=Offset
             startY-=Offset
-            let order=[{room:rooms.find(room=>room.fields.title==user.title),x:startX,y:startY}]
+            let order=[{room:rooms.find(room=>room.title==user.title),x:startX,y:startY}]
             let done=[]
 
             while (order.length>0) {
                 let curr=order.pop()
-                done.push(curr.room.pk)
+                done.push(curr.room.id)
                 
-                let opts = curr.room.fields
+                let opts = curr.room
 
                 let walls=15
-                
                 if(opts.n_to>0){
                     walls-=1
                     
                     if (done.includes(opts.n_to)==false) {
-                        let room = rooms.find(item=>item.pk==opts.n_to)
+                        let room = rooms.find(item=>item.id==opts.n_to)
                         
                         order.push({
                             room,
@@ -90,7 +89,7 @@ function Map({user,rooms}) {
                     walls-=2
                     
                     if (done.includes(opts.e_to)==false) {
-                        let room = rooms.find(item=>item.pk==opts.e_to)
+                        let room = rooms.find(item=>item.id==opts.e_to)
                         
                         order.push({
                             room,
@@ -104,7 +103,7 @@ function Map({user,rooms}) {
                     walls-=4
                     
                     if (done.includes(opts.s_to)==false) {
-                        let room = rooms.find(item=>item.pk==opts.s_to)
+                        let room = rooms.find(item=>item.id==opts.s_to)
                         
                         order.push({
                             room,
@@ -118,7 +117,7 @@ function Map({user,rooms}) {
                     walls-=8
                     
                     if (done.includes(opts.w_to)==false) {
-                        let room = rooms.find(item=>item.pk==opts.w_to)
+                        let room = rooms.find(item=>item.id==opts.w_to)
                         
                         order.push({
                             room,
@@ -128,6 +127,7 @@ function Map({user,rooms}) {
 
                     }
                 }
+                console.log(`drawing ${walls} at ${curr.x},${curr.y}`);
                 ctx.drawImage(images[walls],curr.x,curr.y)
 
                 if (opts.below) {
@@ -178,6 +178,7 @@ function Map({user,rooms}) {
             <img src={leftBottom} className="loaded" alt=""/>
             <img src={rightOnly} className="loaded" alt=""/>
             <img src={topOnly} className="loaded" alt=""/>
+            <img src={none} className="loaded" alt=""/>
             <img src={sprite} alt="" className="loaded" ref={userArt} id="sprite"/>
         </div>
     )

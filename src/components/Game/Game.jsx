@@ -39,9 +39,9 @@ function Game({connection,setUser,logout,user}) {
             try {
                 let req = await connection.get('/api/adv/rooms/')
                 let data = await req.data
-                setRooms(JSON.parse(data.rooms))
+                setRooms(data)
             } catch (error) {
-                console.error({...error});
+                console.error('couldn\'t fetch rooms',{...error});
             }
         }
         if(rooms.length==0){

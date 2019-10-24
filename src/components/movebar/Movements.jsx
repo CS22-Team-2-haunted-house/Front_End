@@ -6,11 +6,9 @@ import {faArrowAltCircleDown} from '@fortawesome/free-regular-svg-icons';
 import {faArrowAltCircleLeft} from '@fortawesome/free-regular-svg-icons';
 import {faArrowAltCircleRight} from '@fortawesome/free-regular-svg-icons';
 function MoveBar(props) {
-    console.log();
 
     const arrows = document.querySelectorAll('.svg-inline--fa')
  
-    console.log(arrows.length)
     
     
    //
@@ -41,11 +39,9 @@ function MoveBar(props) {
     return (
         <section className="movements">
             <section className="arrow-row">
-                {console.log(props.loading)}
                 <FontAwesomeIcon className="arrow" onClick={()=> {
                     if (props.loading === false) {
                         props.move('n') 
-                        console.log('moved north')
                     }
                    
                 }} icon={faArrowAltCircleUp} />
@@ -55,14 +51,12 @@ function MoveBar(props) {
                 <FontAwesomeIcon className="arrow"  onClick={()=> {
                     if (props.loading === false) {
                         props.move('w') 
-                        console.log('moved west')
                     }
                    
                 }} icon={faArrowAltCircleLeft} />
                 <FontAwesomeIcon className="arrow"  onClick={()=> {
                     if (props.loading === false) {
                         props.move('e') 
-                        console.log('moved east')
                     }
                    
                 }} icon={faArrowAltCircleRight} />
@@ -71,7 +65,6 @@ function MoveBar(props) {
             <FontAwesomeIcon className="arrow"  onClick={()=> {
                 if (props.loading === false) {
                     props.move('s') 
-                    console.log('moved south')
                 }
                
             }} icon={faArrowAltCircleDown} />
