@@ -58,7 +58,7 @@ function Game({connection,setUser,logout,user}) {
     const move=async e=>{
         try {
             setLoading(true)
-            // console.log('hello')
+            /// console.log('hello')
             let request = await connection.post('/api/adv/move',{direction: e})
             let data = request.data
             setUser({...data})
