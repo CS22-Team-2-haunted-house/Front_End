@@ -6,7 +6,6 @@ import {faArrowAltCircleDown} from '@fortawesome/free-regular-svg-icons';
 import {faArrowAltCircleLeft} from '@fortawesome/free-regular-svg-icons';
 import {faArrowAltCircleRight} from '@fortawesome/free-regular-svg-icons';
 function MoveBar(props) {
-    console.log();
 
     let arrows = document.querySelectorAll('.arrow')
     
@@ -43,7 +42,6 @@ function MoveBar(props) {
                 <FontAwesomeIcon className="arrow" onClick={()=> {
                     if (props.loading === false && localStorage.getItem('north') === 'true') {
                         props.move('n') 
-                        console.log('moved north')
                     } 
                    
                 }} icon={faArrowAltCircleUp} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleUp} /> }
@@ -54,7 +52,6 @@ function MoveBar(props) {
                 <FontAwesomeIcon className="arrow"  onClick={()=> {
                     if (props.loading === false && localStorage.getItem('west') === 'true') {
                         props.move('w') 
-                        console.log('moved west')
                     }
                    
                 }} icon={faArrowAltCircleLeft} />  : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleLeft} />  }
@@ -62,7 +59,6 @@ function MoveBar(props) {
                 <FontAwesomeIcon className="arrow"  onClick={()=> {
                     if (props.loading === false && localStorage.getItem('east') === 'true') {
                         props.move('e') 
-                        console.log('moved east')
                     }
                    
                 }} icon={faArrowAltCircleRight} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleRight} /> }
@@ -72,7 +68,6 @@ function MoveBar(props) {
             <FontAwesomeIcon className="arrow"  onClick={()=> {
                 if (props.loading === false && localStorage.getItem('south') === 'true') {
                     props.move('s') 
-                    console.log('moved south')
                 } 
                
             }} icon={faArrowAltCircleDown} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleDown} /> }
