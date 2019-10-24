@@ -7,6 +7,10 @@ import Map from '../Map/Map'
 // import { props } from 'bluebird'
 
 function Game({connection,setUser,logout,user}) {
+    let [north, setNorth] = useState(true);
+    let [south, setSouth] = useState(true);
+    let [east, setEast] = useState(true);
+    let [west, setWest] = useState(true);
     const [loading, setLoading] = useState(false);
     let [rooms,setRooms] = useState([])
     
@@ -47,8 +51,8 @@ function Game({connection,setUser,logout,user}) {
         if(rooms.length==0){
             grabber()
         }
-    },[])
-    
+    },[rooms])
+
 
     const move=async e=>{
         try {
@@ -65,6 +69,45 @@ function Game({connection,setUser,logout,user}) {
         }
     }
 
+    ////////  disabling individual arrows if direction is not available // //////
+
+    // filter through rooms and grab the one that === the title and description of the user's position
+    let current = rooms.filter(room => room.fields.title === user.title && room.fields.description === user.description)
+    
+    // it is set inside an object and is the only element, set it to current[0] for convenience 
+    current = current[0]
+
+    
+    // "current && " <--- needed because current is loaded in useEffect
+    ///content is inside "fields" object
+    if (current && current.fields.n_to === 0) { //if current room's 'n_to' points to 0, it is unavailable
+           // using local storage as using a state cause an infinite loop
+            localStorage.setItem('north', 'false') // set storage of north to false
+            
+        /// repeat pattern below
+        } else {
+          
+            localStorage.setItem('north', 'true')
+        }
+    
+        if (current && current.fields.s_to === 0) {
+            localStorage.setItem('south', 'false')
+        } else {
+            localStorage.setItem('south', 'true')
+        }
+    
+        if (current && current.fields.e_to === 0) {
+            localStorage.setItem('east', 'false')
+        } else {
+            localStorage.setItem('east', 'true')
+        }
+    
+        if (current && current.fields.w_to === 0) {
+            localStorage.setItem('west', 'false')
+        } else {
+            localStorage.setItem('west', 'true')
+        }
+
     return (
         <div className="game">
             <p>Haunted House</p>
@@ -80,7 +123,7 @@ function Game({connection,setUser,logout,user}) {
                     <p className="desc">{user.description}</p>
                     <p className="err">{user.error_msg}</p>
                 </div>
-                <Movebar move={move} loading={loading} rooms={rooms}/>
+                <Movebar move={move} loading={loading} rooms={rooms} />
             </div>
          
         </div>

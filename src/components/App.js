@@ -13,6 +13,10 @@ function App(){
     connector.post('/api/logout/')
     connector.defaults.headers.common['Authorization']=null
     window.localStorage.removeItem('token')
+    window.localStorage.removeItem('north')
+    window.localStorage.removeItem('south')
+    window.localStorage.removeItem('east')
+    window.localStorage.removeItem('west')
     setToken(null)
     setUser({})
   }
@@ -51,8 +55,6 @@ function App(){
   }
 
   const buttons = document.querySelectorAll('button');
-
-  
   
   // if (process.env.NODE_ENV==='development') {
   //     connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'
