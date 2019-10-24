@@ -18,7 +18,10 @@ import sprite from '../../images/char.png'
 import './Map.scss'
 const   IMAGE_SIZE=128
 const   SPRITE_HEIGHT=64,
-        SPRITE_WIDTH=40
+        SPRITE_WIDTH=40,
+        LOWER_TILE_SHEET=null,
+        UPPER_TILE_SHEET=null,
+        SPRITE_SHEET=null
 
 
 function Map({user,rooms}) {
@@ -126,11 +129,30 @@ function Map({user,rooms}) {
                     }
                 }
                 ctx.drawImage(images[walls],curr.x,curr.y)
+
+                if (opts.below) {
+                    opts.below.forEach(item=>{
+                        ctx.drawImage(LOWER_TILE_SHEET,
+                            item.sheet.x, item.sheet.y, item.sheet.w, item.sheet.h,
+                            item.loc.x, item.loc.y, item.loc.w, item.loc.h
+                        )
+                    })
+                }
+
                 if (opts.title==user.title) {
                     let userposx=curr.x+Offset-(SPRITE_WIDTH/2),
                         userposy=curr.y+Offset-(SPRITE_HEIGHT/2)
                     ctx.drawImage(userArt.current,userposx,userposy)
                 }else{
+                }
+
+                if (opts.top) {
+                    opts.top.forEach(item=>{
+                        ctx.drawImage(UPPER_TILE_SHEET,
+                            item.sheet.x, item.sheet.y, item.sheet.w, item.sheet.h,
+                            item.loc.x, item.loc.y, item.loc.w, item.loc.h
+                        )
+                    })
                 }
             }
         }else{
