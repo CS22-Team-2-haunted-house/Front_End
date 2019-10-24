@@ -8,13 +8,18 @@ import {faArrowAltCircleRight} from '@fortawesome/free-regular-svg-icons';
 function MoveBar(props) {
     console.log();
 
-    let arrows = document.querySelectorAll('.arrow')
+    const arrows = document.querySelectorAll('.svg-inline--fa')
+ 
+    console.log(arrows.length)
     
     
+   //
     for (let i=0; i < arrows.length; i++) {
-        if (props.loading === true ) {
-            arrows[i].classList.toggle('disabled')
-        } 
+        if (props.loading === true) {
+            arrows[i].style.color = '#953302'
+        } else {
+            arrows[i].style.color = '#F95604'
+        }
         arrows[i].addEventListener('mousedown',() => {
             if (props.loading === false) {
                 arrows[i].style.transform = 'scale(.8)'
@@ -36,44 +41,40 @@ function MoveBar(props) {
     return (
         <section className="movements">
             <section className="arrow-row">
-                {localStorage.getItem('north') === 'true' ?
-                
+                {console.log(props.loading)}
                 <FontAwesomeIcon className="arrow" onClick={()=> {
-                    if (props.loading === false && localStorage.getItem('north') === 'true') {
+                    if (props.loading === false) {
                         props.move('n') 
                         console.log('moved north')
-                    } 
+                    }
                    
-                }} icon={faArrowAltCircleUp} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleUp} /> }
+                }} icon={faArrowAltCircleUp} />
 
             </section>
             <section className="arrow-row__center">
-                {localStorage.getItem('west') === 'true' ?
                 <FontAwesomeIcon className="arrow"  onClick={()=> {
-                    if (props.loading === false && localStorage.getItem('west') === 'true') {
+                    if (props.loading === false) {
                         props.move('w') 
                         console.log('moved west')
                     }
                    
-                }} icon={faArrowAltCircleLeft} />  : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleLeft} />  }
-                {localStorage.getItem('east') === 'true' ? 
+                }} icon={faArrowAltCircleLeft} />
                 <FontAwesomeIcon className="arrow"  onClick={()=> {
-                    if (props.loading === false && localStorage.getItem('east') === 'true') {
+                    if (props.loading === false) {
                         props.move('e') 
                         console.log('moved east')
                     }
                    
-                }} icon={faArrowAltCircleRight} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleRight} /> }
+                }} icon={faArrowAltCircleRight} />
             </section>
             <section className="arrow-row">
-            {localStorage.getItem('south') === 'true' ?
             <FontAwesomeIcon className="arrow"  onClick={()=> {
-                if (props.loading === false && localStorage.getItem('south') === 'true') {
+                if (props.loading === false) {
                     props.move('s') 
                     console.log('moved south')
-                } 
+                }
                
-            }} icon={faArrowAltCircleDown} /> : <FontAwesomeIcon className='disabled' icon={faArrowAltCircleDown} /> }
+            }} icon={faArrowAltCircleDown} />
             </section>
         </section>
     )

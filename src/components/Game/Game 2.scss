@@ -1,0 +1,53 @@
+
+
+.game {
+    background-color: #282c34 !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h3,h2 {
+    color: #fff;
+    text-align: center;
+}
+
+.map {
+    border: 10px solid black;
+    height: 100%;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: auto;
+    margin-bottom: 30px;
+    width: 90%;
+    height: 12rem;
+    transform: translateY(-10px);
+    font-family: 'Special Elite', cursive;
+    & .content {
+        width: 70%;
+        border: 10px solid black;
+        border-radius: 15px 0px 0px 15px;
+        height: inherit;
+    }
+    & .err {
+        color: red;
+        text-decoration: underline;
+    }
+}
+.logoutBtn {
+    padding: 1rem;
+    width: 5rem;
+    color: black;
+    background-color: #F95604;
+    border-radius: 15px;
+    border: none;
+    position: absolute;
+}
