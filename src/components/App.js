@@ -22,14 +22,21 @@ function App(){
   }
 
   const [user,setUser]=useState({})
-
+  const [error,setError]=useState("")
   //login
   const login=async user=>{
     try {
       let attempt = await connector.post('/api/login/',{...user})
       let data = await attempt.data
       loginKey(data.key)
+      setError("")
     } catch (error) {
+        console.log(error.response)
+        if(error.response.status === 400) {
+          setError('Invalid Username or Password')
+        } else if (error.response.data === 500) {
+          setError('We are having issues with our server, please try again later.')
+        }
         return new status(false,error.response.data)
     }
   }
@@ -45,7 +52,15 @@ function App(){
       let attempt = await connector.post('/api/registration/',{...user})
       let data = await attempt.data
       loginKey(data.key)     
+      setError('')
     } catch (error) {
+      setError(error.response.data.username || error.response.data.password1)
+      if (error.response.data.status === 500) {
+        setError('We are having issues with our server, please try again later.')
+      } 
+      
+      
+      
       return new status(false,error.response.data)
     }
   }
@@ -74,7 +89,7 @@ function App(){
       <Screen connection={connector} user={user} setUser={setUser} logout={logout}/>  
     )
   }else{
-    return <Login connection={{login,register}}/>
+    return <Login connection={{login,register}} error={error} setError={setError}/>
   }
 }
 
