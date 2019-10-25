@@ -60,7 +60,7 @@ function App(){
   
   
   if (process.env.NODE_ENV==='development') {
-      connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com'
+      connector.defaults.baseURL='https://lambda-mud-test.herokuapp.com/'
   }
 
   useEffect(()=>{

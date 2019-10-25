@@ -29,6 +29,7 @@ function Game({connection,setUser,logout,user}) {
             try {
                 let request = await connection.get('/api/adv/init/')
                 let data = request.data
+            
                 setUser({...data})
             } catch (error) {
                 logout()
@@ -43,6 +44,7 @@ function Game({connection,setUser,logout,user}) {
             try {
                 let req = await connection.get('/api/adv/rooms/')
                 let data = await req.data
+                console.log(data)
                 setRooms(JSON.parse(data.rooms))
             } catch (error) {
                 console.error({...error});
