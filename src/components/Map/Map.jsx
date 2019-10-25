@@ -127,7 +127,7 @@ function Map({user,rooms}) {
 
                     }
                 }
-                console.log(`drawing ${walls} at ${curr.x},${curr.y}`);
+                // console.log(`drawing ${walls} at ${curr.x},${curr.y}`);
                 ctx.drawImage(images[walls],curr.x,curr.y)
 
                 if (opts.below) {
